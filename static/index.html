@@ -22,7 +22,7 @@
     <script>
         const quizContainer = document.getElementById('quizContainer');
 
-        fetch("http://localhost:8000/quiz")
+        fetch("/quiz")
             .then(res => res.json())
             .then(quizData => {
                 quizData.forEach((q, index) => {
