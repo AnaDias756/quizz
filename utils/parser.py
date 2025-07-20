@@ -19,7 +19,7 @@ def extract_questions(text):
         number = match.group(1) if match else "?"
         enunciado = re.split(r"[a-e]\.\s", block)[0]
         enunciado = re.sub(r"Questão\s+\d+\s*\(.*?\)", "", enunciado).strip()
-        alternativas = re.findall(r"([a-e]\.)\s*(.*?)\s*(?=[a-e]\.|$)", block, re.DOTALL)
+        alternativas = re.findall(r"([a-e])\.\s*(.*?)\s*(?=[a-e]\.|$)", block, re.DOTALL)
 
         q = {
             "question_number": number,
@@ -54,11 +54,11 @@ def save_to_sqlite(questions, db_path="quiz_questions.db"):
         """, (
             q["question_number"],
             q["statement"],
-            opts.get("a.", ""),
-            opts.get("b.", ""),
-            opts.get("c.", ""),
-            opts.get("d.", ""),
-            opts.get("e.", "")
+            opts.get("a", ""),
+            opts.get("b", ""),
+            opts.get("c", ""),
+            opts.get("d", ""),
+            opts.get("e", "")
         ))
 
     conn.commit()
